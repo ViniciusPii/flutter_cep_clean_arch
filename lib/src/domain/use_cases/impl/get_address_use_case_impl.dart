@@ -1,4 +1,4 @@
-import 'package:flutter_arch/src/core/app_exceptions.dart';
+import 'package:flutter_arch/src/core/errors/app_exceptions.dart';
 import 'package:flutter_arch/src/data/repositories/address_repository.dart';
 import 'package:flutter_arch/src/domain/entities/address_entity.dart';
 import 'package:flutter_arch/src/domain/use_cases/get_address_use_case.dart';

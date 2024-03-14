@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_arch/src/core/app_exceptions.dart';
+import 'package:flutter_arch/src/core/errors/app_exceptions.dart';
 import 'package:flutter_arch/src/external/app_client_response.dart';
 import 'package:flutter_arch/src/external/http_service.dart';
 
@@ -17,10 +17,10 @@ class DioHttpServiceImpl implements HttpService {
       return AppClientResponse(data: response.data);
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionError) {
-        throw AppNetworkException(message: 'Erro de conexão!');
+        throw AppNetworkException();
       }
 
-      throw AppGenericException(message: 'Erro genérico');
+      throw AppGenericException();
     }
   }
 }
