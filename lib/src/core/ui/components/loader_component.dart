@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_styles.dart';
-import '../../theme/infra/app_dimension.dart';
+import '/src/core/theme/app_styles.dart';
+import '/src/core/theme/infra/app_dimension.dart';
 import 'three_bounce_component.dart';
 
 class LoaderComponent extends StatelessWidget {
@@ -29,7 +29,7 @@ class LoaderComponent extends StatelessWidget {
         height: height ?? AppDimension.jumbo,
         child: ThreeBounceComponent(
           color: color,
-          size: size ?? AppDimension.xxl,
+          size: size ?? AppDimension.big,
         ),
       ),
     );

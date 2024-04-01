@@ -44,6 +44,20 @@ O arquivo de perfil do PowerShell é um script que é executado automaticamente 
 
 8. No arquivo de perfil, adicione a seguinte linha para criar um alias para o seu script de template:
    ```powershell
+   Set-Alias -Name dts -Value ".\lib\src\core\templates\data_source_template.ps1"
+   ```
+
+   Isso criará um alias chamado `dts` que apontará para o seu script de template.
+
+9. No arquivo de perfil, adicione a seguinte linha para criar um alias para o seu script de template:
+   ```powershell
+   Set-Alias -Name use -Value ".\lib\src\core\templates\use_case_template.ps1"
+   ```
+
+   Isso criará um alias chamado `use` que apontará para o seu script de template.
+
+10. No arquivo de perfil, adicione a seguinte linha para criar um alias para o seu script de template:
+   ```powershell
    Set-Alias -Name service -Value ".\lib\src\core\templates\bloc_route_template.ps1"
    ```
 

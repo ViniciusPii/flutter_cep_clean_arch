@@ -13,10 +13,10 @@ class GetAddressUseCaseImpl implements GetAddressUseCase {
   Future<AddressEntity> call(String cep) {
     try {
       return _addressRepository.getAddress(cep);
-    } on AppGenericException catch (e) {
-      throw AppGenericException(message: e.message);
-    } on AppNetworkException catch (e) {
-      throw AppNetworkException(message: e.message);
+    } on AppMessageException catch (e) {
+      throw AppMessageException(message: e.message);
+    } on AppNetworkMessageException catch (e) {
+      throw AppNetworkMessageException(message: e.message);
     }
   }
 }
