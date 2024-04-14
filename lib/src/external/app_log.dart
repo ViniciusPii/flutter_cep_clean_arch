@@ -1,29 +1,49 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:developer' as developer;
 
 import 'package:flutter_arch/src/external/app_client_response.dart';
 
 class AppLog {
   AppLog._();
 
-  static showLog(AppClientResponse response) {
-    var logMessage = StringBuffer();
-    logMessage.write('-------------\n');
+  static void showLog(AppClientResponse response) {
+    final logMessage = StringBuffer();
+
+    logMessage.write(separatorLine());
+
     if (response.data != null && response.data.isNotEmpty) {
-      logMessage.write('Data:\n${const JsonEncoder.withIndent(' ').convert(response.data)}\n');
-      logMessage.write('-------------\n');
-    }
-    if (response.errorType != null) {
-      logMessage.write('Error Type: ${response.errorType}\n');
-      logMessage.write('-------------\n');
-    }
-    logMessage.write('Message: ${response.message}\n');
-    logMessage.write('-------------\n');
-    if (response.statusCode != null) {
-      logMessage.write('Status code: ${response.statusCode}\n');
-      logMessage.write('-------------\n');
+      logMessage.write('Data:\n${_prettyPrintJson(response.data)}\n');
+      logMessage.write(separatorLine());
     }
 
-    log(logMessage.toString());
+    if (response.errorType != null) {
+      logMessage.write('Error Type: ${response.errorType}\n');
+      logMessage.write(separatorLine());
+    }
+
+    logMessage.write('Message: ${response.message}\n');
+    logMessage.write(separatorLine());
+
+    if (response.statusCode != null) {
+      logMessage.write('Status code: ${response.statusCode}\n');
+      logMessage.write(separatorLine());
+    }
+
+    developer.log(
+      logMessage.toString(),
+      name: 'AppLog',
+    );
+  }
+
+  static String separatorLine() {
+    return '${'-' * 50}\n';
+  }
+
+  static String _prettyPrintJson(dynamic json) {
+    try {
+      return const JsonEncoder.withIndent('  ').convert(json);
+    } catch (e) {
+      return json.toString();
+    }
   }
 }
