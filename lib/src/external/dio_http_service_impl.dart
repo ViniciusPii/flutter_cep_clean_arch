@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_arch/src/core/errors/app_exceptions.dart';
-import 'package:flutter_arch/src/external/app_client_response.dart';
-import 'package:flutter_arch/src/external/app_log.dart';
-import 'package:flutter_arch/src/external/http_service.dart';
+import 'package:flutter_arch/src/core/external/app_client_response.dart';
+import 'package:flutter_arch/src/core/external/app_log.dart';
+import 'package:flutter_arch/src/core/external/http_service.dart';
 
 class DioHttpServiceImpl implements HttpService {
   DioHttpServiceImpl() {

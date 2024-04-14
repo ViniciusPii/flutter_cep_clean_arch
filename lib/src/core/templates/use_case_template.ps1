@@ -1,63 +1,52 @@
-# Obter o nome do projeto Flutter
 $projectName = (Get-Content "pubspec.yaml" | Select-String "name:" | ForEach-Object { $_ -replace '^\s*name:\s*','' }) -replace '\s'
 
-# Solicitar o nome da pasta do usuário
-$pastaNome = Read-Host "Digite o nome da pasta"
+$featureName = Read-Host "Digite o nome da feature"
 
-# Solicitar o nome da feature do usuário
-$featureNome = Read-Host "Digite o nome da feature"
+$repoName = Read-Host "Digite o nome do repository"
 
-# Converter a primeira letra de cada palavra do nome da pasta para maiúscula
-$nomePastaMaiusculo = ($pastaNome -split "_") | ForEach-Object { $_.Substring(0,1).ToUpper() + $_.Substring(1) }
+$useCaseName = Read-Host "Digite o nome do use case"
 
-# Juntar as partes em uma única string
-$nomePastaMaiusculo = $nomePastaMaiusculo -join ""
+$useCaseNameUpper = ($useCaseName -split "_") | ForEach-Object { $_.Substring(0,1).ToUpper() + $_.Substring(1) }
 
-# Converter a primeira letra de cada palavra do nome da pasta para maiúscula
-$featureMaiusculo = ($featureNome -split "_") | ForEach-Object { $_.Substring(0,1).ToUpper() + $_.Substring(1) }
+$useCaseNameUpper = $useCaseNameUpper -join ""
 
-# Juntar as partes em uma única string
-$featureMaiusculo = $featureMaiusculo -join ""
+$featureNameUpper = ($featureName -split "_") | ForEach-Object { $_.Substring(0,1).ToUpper() + $_.Substring(1) }
 
-# Caminho completo da nova pasta
-$caminhoPasta = Join-Path -Path "lib\src\domain\use_cases" -ChildPath $pastaNome
+$featureNameUpper = $featureNameUpper -join ""
 
-# Criar a nova pasta
-New-Item -Path $caminhoPasta -ItemType Directory -Force
+$repoNameUpper = ($repoName -split "_") | ForEach-Object { $_.Substring(0,1).ToUpper() + $_.Substring(1) }
 
-# Template do use_case_impl.dart
+$repoNameUpper = $repoNameUpper -join ""
+
+$pathFolder = Join-Path -Path "lib\src\domain\use_cases\" -ChildPath $featureName
+
+New-Item -Path $pathFolder -ItemType Directory -Force
+
 $useCaseImplTemplate = @"
-import 'package:$projectName/src/data/repositories/${pastaNome}/${pastaNome}_repository.dart';
-import 'package:$projectName/src/domain/use_cases/${pastaNome}/${featureNome}_use_case.dart';
+import 'package:$projectName/src/data/repositories/$featureName/${repoName}_repository.dart';
+import 'package:$projectName/src/domain/use_cases/$featureName/${useCaseName}_use_case.dart';
 
-class ${featureMaiusculo}UseCaseImpl implements ${featureMaiusculo}UseCase {
-  ${featureMaiusculo}UseCaseImpl({
-    required ${nomePastaMaiusculo}Repository repository,
+class ${useCaseNameUpper}UseCaseImpl implements ${useCaseNameUpper}UseCase {
+  ${useCaseNameUpper}UseCaseImpl({
+    required ${repoNameUpper}Repository repository,
   }) : _repository = repository;
 
-  final ${nomePastaMaiusculo}Repository _repository;
+  final ${repoNameUpper}Repository _repository;
 }
 "@
 
-# Template do use_case.dart
 $useCaseTemplate = @"
-abstract class ${featureMaiusculo}UseCase {}
+abstract class ${useCaseNameUpper}UseCase {}
 "@
 
-# Caminho completo para a pasta 'impl' dentro da pasta criada
-$caminhoImpl = Join-Path -Path $caminhoPasta -ChildPath "impl"
+$pathImpl = Join-Path -Path $pathFolder -ChildPath "impl"
 
-# Criar a pasta 'impl' dentro da pasta criada
-New-Item -Path $caminhoImpl -ItemType Directory -Force
+New-Item -Path $pathImpl -ItemType Directory -Force
 
-# Caminho completo para o arquivo use_case_impl.dart
-$caminhoUseCaseImpl = Join-Path -Path $caminhoImpl -ChildPath "${featureNome}_use_case_impl.dart"
+$pathUseCaseImpl = Join-Path -Path $pathImpl -ChildPath "${useCaseName}_use_case_impl.dart"
 
-# Criar o arquivo use_case_impl.dart com base no template
-$useCaseImplTemplate | Set-Content -Path $caminhoUseCaseImpl
+$useCaseImplTemplate | Set-Content -Path $pathUseCaseImpl
 
-# Caminho completo para o arquivo use_case.dart
-$caminhoUseCase = Join-Path -Path $caminhoPasta -ChildPath "${featureNome}_use_case.dart"
+$pathUseCase = Join-Path -Path $pathFolder -ChildPath "${useCaseName}_use_case.dart"
 
-# Criar o arquivo use_case.dart com base no template
-$useCaseTemplate | Set-Content -Path $caminhoUseCase
+$useCaseTemplate | Set-Content -Path $pathUseCase

@@ -1,11 +1,11 @@
+import 'package:flutter_arch/src/core/external/http_service.dart';
 import 'package:flutter_arch/src/data/data_sources/address_data_source.dart';
 import 'package:flutter_arch/src/data/data_sources/impl/address_data_source_impl.dart';
 import 'package:flutter_arch/src/data/repositories/address_repository.dart';
 import 'package:flutter_arch/src/data/repositories/impl/address_repository_impl.dart';
 import 'package:flutter_arch/src/domain/use_cases/get_address_use_case.dart';
 import 'package:flutter_arch/src/domain/use_cases/impl/get_address_use_case_impl.dart';
-import 'package:flutter_arch/src/external/http_service.dart';
-import 'package:flutter_arch/src/external/impl/dio_http_service_impl.dart';
+import 'package:flutter_arch/src/external/dio_http_service_impl.dart';
 import 'package:flutter_arch/src/presentation/home/controller/home_cubit.dart';
 import 'package:get_it/get_it.dart';
 

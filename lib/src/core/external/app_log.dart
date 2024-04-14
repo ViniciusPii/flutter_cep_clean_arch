@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 
-import 'package:flutter_arch/src/external/app_client_response.dart';
+import 'package:flutter_arch/src/core/external/app_client_response.dart';
 
 class AppLog {
   AppLog._();
