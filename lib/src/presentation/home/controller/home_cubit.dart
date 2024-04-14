@@ -17,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       final address = await _getAddressUseCase(cep);
       emit(HomeStateSuccess(address: address));
-    } on AppMessageException catch (e) {
+    } on AppGenericMessageException catch (e) {
       emit(HomeStateError(message: e.message, isNetworError: false));
     } on AppNetworkMessageException catch (e) {
       emit(HomeStateError(message: e.message, isNetworError: true));

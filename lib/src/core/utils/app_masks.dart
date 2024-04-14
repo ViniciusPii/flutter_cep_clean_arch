@@ -1,9 +1,9 @@
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class Masks {
-  Masks._();
+class AppMasks {
+  AppMasks._();
 
-  static final phoneMask = MaskTextInputFormatter(mask: '(##) #####-####');
+  static final cepMask = MaskTextInputFormatter(mask: '#####-###');
 }
 
 extension MaskExtension on MaskTextInputFormatter {

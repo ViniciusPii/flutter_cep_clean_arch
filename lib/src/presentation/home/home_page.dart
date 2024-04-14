@@ -6,9 +6,9 @@ import 'package:flutter_arch/src/core/ui/components/app_title.dart';
 import 'package:flutter_arch/src/core/ui/components/loader_component.dart';
 import 'package:flutter_arch/src/core/ui/components/snack_bar/snack_bar_component.dart';
 import 'package:flutter_arch/src/core/ui/components/spacing_page.dart';
+import 'package:flutter_arch/src/core/utils/app_masks.dart';
 import 'package:flutter_arch/src/presentation/home/controller/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:validatorless/validatorless.dart';
 
 import '../../core/ui/base_bloc_state.dart';
@@ -47,11 +47,7 @@ class _HomePageState extends BaseBlocState<HomePage, HomeCubit> {
                   autofocus: true,
                   controller: _cepEC,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    MaskTextInputFormatter(
-                      mask: '#####-###',
-                    )
-                  ],
+                  inputFormatters: [AppMasks.cepMask],
                   decoration: const InputDecoration(
                     label: Text('CEP'),
                     hintText: 'Ex: #####-###',

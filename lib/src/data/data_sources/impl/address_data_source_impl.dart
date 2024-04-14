@@ -19,11 +19,17 @@ class AddressDataSourceImpl implements AddressDataSource {
 
       final data = response.data;
 
-      return AddressAdapter.fromJson(data);
-    } on AppNetworkMessageException catch (_) {
+      if (response.statusCode == 200 && data['erro'] == true) {
+        throw AppGenericMessageException(message: 'Cep não encontrado!');
+      }
+
+      return AddressAdapter.convert(data);
+    } on AppNetworkException catch (_) {
       throw AppNetworkMessageException(message: 'Ops! Você está sem conexão!');
+    } on AppGenericMessageException catch (e) {
+      throw AppGenericMessageException(message: e.message);
     } catch (e) {
-      throw AppMessageException(message: 'CEP não encontrado!');
+      throw AppGenericMessageException(message: 'Ops! Algo deu errado');
     }
   }
 }
